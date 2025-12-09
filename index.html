@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8" />
+    <title>แบบฟอร์มขอลางาน</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  <div class="container">
+    <h2>แบบฟอร์มขอลางาน</h2>
+
+    <form id="leaveForm" method="POST" action="https://docs.google.com/forms/d/e/1FAIpQLSeGQbWubirblJkJ1kNt_UsrJZOFcu3nrU7XYDBnybxsIDV2MA/formResponse" target="hidden_iframe" onsubmit="submitted=true;">
+
+      <label>ชื่อ-สกุล</label>
+      <input type="text" name="entry.1668084448" required />
+
+      <label>ประเภทการลา</label>
+      <select name="entry.1124550017" required>
+        <option value="ลากิจ">ลากิจ</option>
+        <option value="ลาป่วย">ลาป่วย</option>
+      </select>
+
+      <label>รูปแบบวันลา</label>
+      <select name="entry.147885691" required>
+        <option value="ลาเต็มวัน">ลาเต็มวัน</option>
+        <option value="ลาครึ่งวันเช้า">ลาครึ่งวันเช้า</option>
+        <option value="ลาครึ่งวันบ่าย">ลาครึ่งวันบ่าย</option>
+      </select>
+
+      <label>เริ่มลา</label>
+      <input type="date" name="entry.1390241193" required />
+
+      <label>สิ้นสุด</label>
+      <input type="date" name="entry.697141777" required />
+
+      <label>จำนวนวัน</label>
+      <input type="number" name="entry.1256707217" min="1" required />
+
+      <label>หมายเหตุ</label>
+      <textarea name="entry.1251598074"></textarea>
+
+      <button type="submit">ส่งคำขอ</button>
+    </form>
+
+    <iframe name="hidden_iframe" style="display:none;"></iframe>
+  </div>
+
+  <script>
+    let submitted = false;
+    document.getElementById("leaveForm").addEventListener("submit", () => {
+      setTimeout(() => {
+        alert("ส่งข้อมูลเรียบร้อยแล้ว");
+        document.getElementById("leaveForm").reset();
+      }, 500);
+    });
+  </script>
+</body>
+</html>
