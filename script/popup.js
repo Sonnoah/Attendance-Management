@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2'
+
 export function showSuccess() {
   Swal.fire({
     icon: 'success',
