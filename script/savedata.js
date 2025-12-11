@@ -2,7 +2,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebas
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc 
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyC1qq59U0moH20dOCpAITNFR9ttHLxTRFg",
@@ -51,7 +52,7 @@ try {
     Swal.fire({
       icon: 'success',
       title: 'ส่งคำขอสำเร็จ',
-      text: 'บันทึกข้อมูลเรียบร้อยแล้ว',
+      text: 'บันทึกข้อมูลเรียบร้อยแล้ว 😊',
       confirmButtonText: 'ตกลง'
     });
 } catch (e) {
