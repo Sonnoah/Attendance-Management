@@ -56,7 +56,7 @@ try {
         timer: 1500,
         showConfirmButton: false
     }).then(() => {
-    document.getElementById("form").reset();
+    document.getElementById("Form").reset();
     });
 
 } catch (e) {

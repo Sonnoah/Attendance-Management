@@ -12,40 +12,40 @@
   <body>
     <div class="container">
       <h2>แบบฟอร์มขอลางาน</h2>
+        <form id="Form">
+            <input type="hidden" id="userId">
 
-        <input type="hidden" id="userId">
+            <label>ชื่อ-สกุล</label>
+            <input type="text" name="name" id="name" required />
 
-        <label>ชื่อ-สกุล</label>
-        <input type="text" name="name" id="name" required />
+            <label>ประเภทการลา</label>
+            <select name="type" id="type">
+            <option value="ลากิจ">ลากิจ</option>
+            <option value="ลาป่วย">ลาป่วย</option>
+            </select>
 
-        <label>ประเภทการลา</label>
-        <select name="type" id="type">
-          <option value="ลากิจ">ลากิจ</option>
-          <option value="ลาป่วย">ลาป่วย</option>
-        </select>
+            <label>รูปแบบวันลา</label>
+            <select name="pattern" id="pattern" required>
+            <option value="ลาเต็มวัน">ลาเต็มวัน</option>
+            <option value="ลาครึ่งวันเช้า">ลาครึ่งวันเช้า</option>
+            <option value="ลาครึ่งวันบ่าย">ลาครึ่งวันบ่าย</option>
+            </select>
 
-        <label>รูปแบบวันลา</label>
-        <select name="pattern" id="pattern" required>
-          <option value="ลาเต็มวัน">ลาเต็มวัน</option>
-          <option value="ลาครึ่งวันเช้า">ลาครึ่งวันเช้า</option>
-          <option value="ลาครึ่งวันบ่าย">ลาครึ่งวันบ่าย</option>
-        </select>
+            <label>เริ่มลา</label>
+            <input type="date" name="start_date" id="start_date" required />
 
-        <label>เริ่มลา</label>
-        <input type="date" name="start_date" id="start_date" required />
+            <label>สิ้นสุด</label>
+            <input type="date" name="end_date" id="end_date" required />
 
-        <label>สิ้นสุด</label>
-        <input type="date" name="end_date" id="end_date" required />
+            <label>จำนวนวัน</label>
+            <input type="number" name="count_day" id="count_day" min="1" required />
 
-        <label>จำนวนวัน</label>
-        <input type="number" name="count_day" id="count_day" min="1" required />
-
-        <label>หมายเหตุ</label>
-        <textarea name="note" id="note"></textarea>
-
-        <button onclick="submitForm()">ส่งคำขอ</button>
+            <label>หมายเหตุ</label>
+            <textarea name="note" id="note"></textarea>
+        </form>
+            <button onclick="submitForm()">ส่งคำขอ</button>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="/script/savedata.js"></script>
   </body>
