@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>แบบฟอร์มขอลางาน</title>
+
+    <!-- LIFF -->
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+    <!-- Firebase compat version -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore-compat.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <div class="container">
+      <h2>แบบฟอร์มขอลางาน</h2>
+        <p id="userId"><b>userId : </b></p>
+
+        <label>ชื่อ-สกุล</label>
+        <input type="text" name="name" id="name" required />
+
+        <label>ประเภทการลา</label>
+        <select name="type" id="type">
+          <option value="ลากิจ">ลากิจ</option>
+          <option value="ลาป่วย">ลาป่วย</option>
+        </select>
+
+        <label>รูปแบบวันลา</label>
+        <select name="pattern" id="pattern" required>
+          <option value="ลาเต็มวัน">ลาเต็มวัน</option>
+          <option value="ลาครึ่งวันเช้า">ลาครึ่งวันเช้า</option>
+          <option value="ลาครึ่งวันบ่าย">ลาครึ่งวันบ่าย</option>
+        </select>
+
+        <label>เริ่มลา</label>
+        <input type="date" name="start_date" id="start_date" required />
+
+        <label>สิ้นสุด</label>
+        <input type="date" name="end_date" id="end_date" required />
+
+        <label>จำนวนวัน</label>
+        <input type="number" name="count_day" id="count_day" min="1" required />
+
+        <label>หมายเหตุ</label>
+        <textarea name="note" id="note"></textarea>
+
+        <button type="button" id="submitBtn">ส่งคำขอ</button>
+    </div>
+
+    <script>
+      // ========== Firebase Config ==========
+      const firebaseConfig = {
+        apiKey: "AIzaSyARiJBQ5c1b774RWRA1EhhIs10rbrXy0RM",
+        authDomain: "request-for-leave.firebaseapp.com",
+        projectId: "request-for-leave",
+        storageBucket: "request-for-leave.firebasestorage.app",
+        messagingSenderId: "344951395882",
+        appId: "1:344951395882:web:bb0c64af2018ca8f3c9553",
+        measurementId: "G-FRHZ608VYT"
+      };
+
+      // Initialize Firebase (compat)
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+
+      // ========== LIFF Init ==========
+      async function main() {
+        await liff.init({ liffId: "2008650824-wo3yRXa9" });
+        if (liff.isLoggedIn()) {
+          getUserProfile();
+        } else {
+          liff.login();
+        }
+      }
+      main();
+
+      // ========== Get Profile ==========
+      async function getUserProfile() {
+        const profile = await liff.getProfile();
+        document.getElementById("userId").append(profile.userId);
+      }
+
+      // ========== Submit to Firestore ==========
+      document.getElementById("submitBtn").addEventListener("click", async () => {
+
+        const data = {
+          userId: document.getElementById("userId").innerText.replace("userId : ", ""),
+          name: document.getElementById("name").value,
+          type: document.getElementById("type").value,
+          pattern: document.getElementById("pattern").value,
+          start_date: document.getElementById("start_date").value,
+          end_date: document.getElementById("end_date").value,
+          count_day: document.getElementById("count_day").value,
+          note: document.getElementById("note").value,
+          timestamp: new Date()
+        };
+
+        try {
+          await db.collection("leave_request").add(data);
+          alert("ส่งคำขอสำเร็จ!");
+        } catch (error) {
+          console.error("Error adding document: ", error);
+          alert("เกิดข้อผิดพลาด!");
+        }
+
+      });
+    </script>
+
+  </body>
+</html>
