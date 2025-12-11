@@ -49,7 +49,7 @@ const data = {
 
 try {
     await addDoc(collection(db, "request"), data);
-    showSuccess();
+    alert("yes");
 } catch (e) {
     console.error("Error adding document: ", e);
     alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
