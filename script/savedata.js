@@ -61,7 +61,14 @@ try {
 
 } catch (e) {
     console.error("Error adding document: ", e);
-    alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
+    Swal.fire({
+        icon: 'error',
+        title: 'ส่งคำขอไม่สำเร็จ',
+        text: 'เกิดข้อผิดพลาดในการบันทึกข้อมูล ',
+        confirmButtonText: 'ตกลง',
+        timer: 1500,
+        showConfirmButton: false
+    });
 }
 }
 
