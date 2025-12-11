@@ -3,17 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LIFF - LINE Front-end Framework</title>
-  <style>
-    body { margin: 16px }
-    button, img { display: none; width: 40% }
-    button { padding: 16px }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <title>แบบฟอร์มขอลางาน</title>
 </head>
 <body>
-  <h1>Page 1</h1>
-  <img id="pictureUrl">
-  <p id="userId"><b>userId : </b></p>
+    <div class="container">
+      <form id="myForm" onsubmit="handleFormSubmit(this)">
+          <h2>แบบฟอร์มขอลางาน</h2>
+
+          <input type="text" id="userId" name="userId" readonly>
+
+            <label>ชื่อ-สกุล</label>
+            <input type="text" name="name" id="name" required>
+
+            <label>ประเภทการลา</label>
+            <select name="type" id="type">
+              <option value="ลากิจ">ลากิจ</option>
+              <option value="ลาป่วย">ลาป่วย</option>
+            </select>
+
+            <label>รูปแบบวันลา</label>
+            <select name="pattern" id="pattern" required>
+              <option value="ลาเต็มวัน">ลาเต็มวัน</option>
+              <option value="ลาครึ่งวันเช้า">ลาครึ่งวันเช้า</option>
+              <option value="ลาครึ่งวันบ่าย">ลาครึ่งวันบ่าย</option>
+            </select>
+            
+            <label>เริ่มลา</label>
+            <input type="date" class="date-input" data-placeholder="" name="start_date" id="start_date" required />
+
+            <label>สิ้นสุด</label>
+            <input type="date" class="date-input" data-placeholder="" name="end_date" id="end_date" required />
+
+            <label>จำนวนวัน</label>
+            <input type="number" name="count_day" id="count_day" min="1" required />
+
+            <label>หมายเหตุ</label>
+            <textarea name="note" id="note"></textarea>
+
+          <button type="submit">ส่งคำขอ</button>
+      </form>
+      <div id="output"></div>
+    </div>
 
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
@@ -28,11 +60,24 @@
     main()
 
     async function getUserProfile() {
-        const profile = await liff.getProfile()
-        document.getElementById("pictureUrl").style.display = "block"
         document.getElementById("pictureUrl").src = profile.pictureUrl
         document.getElementById("userId").append(profile.userId)
     }
+
+    function preventFormSubmit() {
+        var forms = document.querySelectorAll("form");
+        for (var i = 0; i < forms.length; i++) {
+          forms[i].addEventListener("submit", function(event) {
+            event.preventDefault();
+          });
+        }
+      }
+      window.addEventListener("load", preventFormSubmit);
+
+      function handleFormSubmit(formObject) {
+        google.script.run.processForm(formObject);
+        document.getElementById("myForm").reset();
+      }
   </script>
 </body>
 </html>
