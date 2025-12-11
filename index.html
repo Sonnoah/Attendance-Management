@@ -7,13 +7,13 @@
 
     <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+    <link href="/component/style.css" rel="stylesheet">
 
   </head>
   <body>
     <div class="container">
       <h2>แบบฟอร์มขอลางาน</h2>
-        <p id="userId"><b>userId : </b></p>
+
         <input type="hidden" id="uid">
 
         <label>ชื่อ-สกุล</label>
@@ -47,74 +47,6 @@
         <button onclick="submitForm()">ส่งคำขอ</button>
     </div>
 
-   <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
-
-  // ★★ Firestore ★★
-  import { 
-    getFirestore, 
-    collection, 
-    addDoc 
-  } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyC1qq59U0moH20dOCpAITNFR9ttHLxTRFg",
-    authDomain: "pt-test-b0dc9.firebaseapp.com",
-    projectId: "pt-test-b0dc9",
-    storageBucket: "pt-test-b0dc9.firebasestorage.app",
-    messagingSenderId: "1938984234",
-    appId: "1:1938984234:web:89078e2d16c3958cc6a253",
-    measurementId: "G-F2KV6LY4XE"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  const db = getFirestore(app);   // ← ต้องมี
-
-  // ====== LIFF ======
-  async function main() {
-    await liff.init({ liffId: "2008650824-wo3yRXa9" });
-    if (liff.isLoggedIn()) {
-      getUserProfile();
-    } else {
-      liff.login();
-    }
-  }
-  main();
-
-  async function getUserProfile() {
-    const profile = await liff.getProfile();
-    document.getElementById("userId").append(profile.userId);
-    document.getElementById("uid").value = profile.userId;
-  }
-
-  // ====== บันทึกลง Firestore ======
-  async function saveToFirestore() {
-    const data = {
-      userId: document.getElementById("uid").value,
-      name: document.getElementById("name").value,
-      type: document.getElementById("type").value,
-      pattern: document.getElementById("pattern").value,
-      start_date: document.getElementById("start_date").value,
-      end_date: document.getElementById("end_date").value,
-      count_day: document.getElementById("count_day").value,
-      note: document.getElementById("note").value,
-      timestamp: new Date(),
-    };
-
-    try {
-      await addDoc(collection(db, "leave_form"), data);
-      alert("ส่งคำขอสำเร็จ 👍");
-    } catch (e) {
-      console.error("Error adding document: ", e);
-      alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
-    }
-  }
-
-  window.submitForm = function () {
-    saveToFirestore();
-  };
-</script>
+    <script type="module" src="/script/savedata.js"></script>
   </body>
 </html>
