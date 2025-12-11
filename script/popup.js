@@ -1,6 +1,6 @@
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
-export function showSuccess() {
+export async function showSuccess() {
   Swal.fire({
     icon: 'success',
     title: 'ส่งคำขอสำเร็จ',
