@@ -4,17 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>แบบฟอร์มขอลางาน</title>
-
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
 
 </head>
 <body>
+    <p id="userId" ><b>userId : </b></p>
     <div class="container">
       <h2>แบบฟอร์มขอลางาน</h2>
-
-        <p id="userId" ><b>userId : </b></p>
-
         <label>ชื่อ-สกุล</label>
         <input type="text" name="name" id="name" required>
 
@@ -47,7 +45,6 @@
       </div>
   </div>
 
-  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
     async function main() {
       await liff.init({ liffId: "2008650824-wo3yRXa9" })
