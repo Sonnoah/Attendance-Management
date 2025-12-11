@@ -30,13 +30,13 @@ main();
 
 async function getUserProfile() {
 const profile = await liff.getProfile();
-document.getElementById("userId").append(profile.userId);
-// document.getElementById("uid").value = profile.userId;
+// document.getElementById("userId").append(profile.userId);
+document.getElementById("uid").value = profile.userId;
 }
 
 async function saveToFirestore() {
 const data = {
-    userId: document.getElementById("userId").value,
+    userId: document.getElementById("uid").value,
     name: document.getElementById("name").value,
     type: document.getElementById("type").value,
     pattern: document.getElementById("pattern").value,
