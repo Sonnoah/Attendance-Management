@@ -22,3 +22,26 @@ body {
     box-sizing: border-box;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
+
+label {
+    display: block;
+    margin-top: 25px;
+    font-size: 25px;
+    font-weight: 600;
+    color: #444;
+}
+
+input, select, textarea {
+    font-family: "Kanit", sans-serif !important;;
+    width: 100% !important;
+    background: #ffffff;
+    padding: 15px;
+    margin-top: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 25px;
+    box-sizing: border-box;
+
+    -webkit-appearance: none;
+    appearance: none;
+}
