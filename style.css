@@ -36,73 +36,32 @@ label {
 }
 
 input, select, textarea {
-    font-family: "Kanit", sans-serif !important;;
-    width: 100% !important;
-    background: #ffffff;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    box-sizing: border-box;
-
-    -webkit-appearance: none;
-    appearance: none;
-}
-
-/* กล่องครอบ input */
-.date-wrapper {
-    position: relative;
-    width: 100%;
-}
-
-/* ตัว placeholder ปลอม */
-.date-placeholder {
-    position: absolute;
-    left: 12px;
-    top: 11px;
-    color: #777;
-    pointer-events: none;
-    font-family: "Kanit", sans-serif;
-}
-
-/* ซ่อนเมื่อมีข้อมูล */
-.date-wrapper input:not(:placeholder-shown) + .date-placeholder {
-    display: none;
-}
-
-.date-wrapper input:focus + .date-placeholder {
-    display: none;
-}
-
-
-input[type="date"] {
     font-family: "Kanit", sans-serif !important;
     width: 100% !important;
     background: #ffffff;
-    padding: 10px;
+    padding: 10px 14px;
     margin-top: 5px;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 12px;
     font-size: 16px;
     box-sizing: border-box;
-
     -webkit-appearance: none;
     appearance: none;
 
-    /* เพื่อให้ placeholder-shown ใช้งานได้ */
-    color: transparent;
+    min-height: 48px; 
 }
 
-input[type="date"]:focus {
-    color: #000;
+.date-input:before {
+    content: attr(data-placeholder);
+    color: #777;
+    position: absolute;
+    pointer-events: none;
 }
 
-/* เมื่อมีค่าแล้ว ให้ text ปกติ */
-input[type="date"]:not(:placeholder-shown) {
-    color: #000;
+.date-input:focus:before,
+.date-input.filled:before {
+    display: none;
 }
-
 
 select {
     background-color: white;
