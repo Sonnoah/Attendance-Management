@@ -34,6 +34,14 @@ document.getElementById("userId").value = profile.userId;
 }
 
 async function saveToFirestore() {
+    
+const form = document.getElementById("Form");
+
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+  
 const data = {
     userId: document.getElementById("userId").value,
     name: document.getElementById("name").value,
@@ -55,9 +63,8 @@ try {
         confirmButtonText: 'ตกลง',
         timer: 1500,
         showConfirmButton: false
-    }).then(() => {
-    document.getElementById("Form").reset();
     });
+    form.reset();
 
 } catch (e) {
     console.error("Error adding document: ", e);
