@@ -13,6 +13,23 @@
     <div class="container">
       <h2>แบบฟอร์มขอลางาน</h2>
           <p id="userId" ><b>userId : </b></p>
+
+          <label>ชื่อ-สกุล</label>
+          <input type="text" name="name" id="name" required>
+
+          <label>ประเภทการลา</label>
+          <select name="type" id="type">
+            <option value="ลากิจ">ลากิจ</option>
+            <option value="ลาป่วย">ลาป่วย</option>
+          </select>
+
+          <label>รูปแบบวันลา</label>
+          <select name="pattern" id="pattern" required>
+            <option value="ลาเต็มวัน">ลาเต็มวัน</option>
+            <option value="ลาครึ่งวันเช้า">ลาครึ่งวันเช้า</option>
+            <option value="ลาครึ่งวันบ่าย">ลาครึ่งวันบ่าย</option>
+          </select>
+              
   </div>
 
   <script>
