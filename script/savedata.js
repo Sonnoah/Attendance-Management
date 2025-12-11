@@ -2,9 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebas
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 
-import { getFirestore, collection, addDoc 
-} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
-import { showSuccess } from "./popup";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyC1qq59U0moH20dOCpAITNFR9ttHLxTRFg",
@@ -50,7 +48,14 @@ const data = {
 
 try {
     await addDoc(collection(db, "request"), data);
-    showSuccess();
+    Swal.fire({
+    icon: 'success',
+    title: 'สำเร็จ!',
+    timer: 1500,
+    showConfirmButton: false
+    }).then(() => {
+        document.getElementById("form").reset();
+    });
 } catch (e) {
     console.error("Error adding document: ", e);
     alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
