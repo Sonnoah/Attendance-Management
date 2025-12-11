@@ -1,4 +1,4 @@
-function showSuccess() {
+export function showSuccess() {
   Swal.fire({
     icon: 'success',
     title: 'ส่งคำขอสำเร็จ',

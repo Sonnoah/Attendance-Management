@@ -1,12 +1,13 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
+import { showSuccess } from "./popup";
 
 import { getFirestore, collection, addDoc 
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyC1qq59U0moH20dOCpAITNFR9ttHLxTRFg",
-authDomain: "pt-test-b0dc9.firebaseapp.com",
+authDomain: "pt-test-b0dc9.firebaseapp.com",s
 projectId: "pt-test-b0dc9",
 storageBucket: "pt-test-b0dc9.firebasestorage.app",
 messagingSenderId: "1938984234",
@@ -48,7 +49,7 @@ const data = {
 
 try {
     await addDoc(collection(db, "request"), data);
-    showSuccess()
+    showSuccess();
 } catch (e) {
     console.error("Error adding document: ", e);
     alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
