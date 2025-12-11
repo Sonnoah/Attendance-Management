@@ -5,13 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>แบบฟอร์มขอลางาน</title>
 
-    <!-- LIFF -->
     <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-
-    <!-- Firebase compat version -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore-compat.js"></script>
-
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
 
@@ -49,26 +43,25 @@
         <label>หมายเหตุ</label>
         <textarea name="note" id="note"></textarea>
 
-        <button type="button" id="submitBtn">ส่งคำขอ</button>
+        <button onclick="submitForm()">ส่งคำขอ</button>
     </div>
 
-    <script>
-      // ========== Firebase Config ==========
+     <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
+ 
       const firebaseConfig = {
-        apiKey: "AIzaSyARiJBQ5c1b774RWRA1EhhIs10rbrXy0RM",
-        authDomain: "request-for-leave.firebaseapp.com",
-        projectId: "request-for-leave",
-        storageBucket: "request-for-leave.firebasestorage.app",
-        messagingSenderId: "344951395882",
-        appId: "1:344951395882:web:bb0c64af2018ca8f3c9553",
-        measurementId: "G-FRHZ608VYT"
+        apiKey: "AIzaSyC1qq59U0moH20dOCpAITNFR9ttHLxTRFg",
+        authDomain: "pt-test-b0dc9.firebaseapp.com",
+        projectId: "pt-test-b0dc9",
+        storageBucket: "pt-test-b0dc9.firebasestorage.app",
+        messagingSenderId: "1938984234",
+        appId: "1:1938984234:web:89078e2d16c3958cc6a253",
+        measurementId: "G-F2KV6LY4XE"
       };
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
 
-      // Initialize Firebase (compat)
-      firebase.initializeApp(firebaseConfig);
-      const db = firebase.firestore();
-
-      // ========== LIFF Init ==========
       async function main() {
         await liff.init({ liffId: "2008650824-wo3yRXa9" });
         if (liff.isLoggedIn()) {
@@ -79,37 +72,47 @@
       }
       main();
 
-      // ========== Get Profile ==========
+
       async function getUserProfile() {
         const profile = await liff.getProfile();
         document.getElementById("userId").append(profile.userId);
+        document.getElementById("uid").value = profile.userId;
       }
 
-      // ========== Submit to Firestore ==========
-      document.getElementById("submitBtn").addEventListener("click", async () => {
 
-        const data = {
-          userId: document.getElementById("userId").innerText.replace("userId : ", ""),
-          name: document.getElementById("name").value,
-          type: document.getElementById("type").value,
-          pattern: document.getElementById("pattern").value,
-          start_date: document.getElementById("start_date").value,
-          end_date: document.getElementById("end_date").value,
-          count_day: document.getElementById("count_day").value,
-          note: document.getElementById("note").value,
-          timestamp: new Date()
-        };
+      async function saveToFirestore() {
+        const name = document.getElementById("name").value;
+        const type = document.getElementById("type").value;
+        const pattern = document.getElementById("pattern").value;
+        const start_date = document.getElementById("start_date").value;
+        const end_date = document.getElementById("end_date").value;
+        const count_day = document.getElementById("count_day").value;
+        const note = document.getElementById("note").value;
+        const userId = document.getElementById("uid").value;
 
         try {
-          await db.collection("leave_request").add(data);
-          alert("ส่งคำขอสำเร็จ!");
-        } catch (error) {
-          console.error("Error adding document: ", error);
-          alert("เกิดข้อผิดพลาด!");
+          await addDoc(collection(db, "leave_form"), {
+            userId,
+            name,
+            type,
+            pattern,
+            start_date,
+            end_date,
+            count_day,
+            note,
+            timestamp: new Date()
+          });
+
+          alert("ส่งคำขอสำเร็จ 👍");
+        } catch (e) {
+          console.error("Error adding document: ", e);
+          alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
         }
+      }
 
-      });
+      window.submitForm = function () {
+        saveToFirestore();
+      };
     </script>
-
   </body>
 </html>
