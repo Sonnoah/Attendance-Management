@@ -29,7 +29,21 @@
             <option value="ลาครึ่งวันเช้า">ลาครึ่งวันเช้า</option>
             <option value="ลาครึ่งวันบ่าย">ลาครึ่งวันบ่าย</option>
           </select>
-              
+
+          <label>เริ่มลา</label>
+          <input type="date" class="date-input" data-placeholder="" name="start_date" id="start_date" required />
+
+          <label>สิ้นสุด</label>
+          <input type="date" class="date-input" data-placeholder="" name="end_date" id="end_date" required />
+
+          <label>จำนวนวัน</label>
+          <input type="number" name="count_day" id="count_day" min="1" required />
+
+          <label>หมายเหตุ</label>
+          <textarea name="note" id="note"></textarea>
+
+          <button type="submit">ส่งคำขอ</button>
+  
   </div>
 
   <script>
