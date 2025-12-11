@@ -1,6 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
-import { showSuccess } from "./popup";
 
 import { getFirestore, collection, addDoc 
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
@@ -49,7 +48,7 @@ const data = {
 
 try {
     await addDoc(collection(db, "request"), data);
-    alert("yes");
+    alert("ส่งคำขอสำเร็จ 👍");
 } catch (e) {
     console.error("Error adding document: ", e);
     alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
