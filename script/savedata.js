@@ -7,7 +7,7 @@ import { getFirestore, collection, addDoc
 
 const firebaseConfig = {
 apiKey: "AIzaSyC1qq59U0moH20dOCpAITNFR9ttHLxTRFg",
-authDomain: "pt-test-b0dc9.firebaseapp.com",s
+authDomain: "pt-test-b0dc9.firebaseapp.com",
 projectId: "pt-test-b0dc9",
 storageBucket: "pt-test-b0dc9.firebasestorage.app",
 messagingSenderId: "1938984234",
