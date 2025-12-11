@@ -49,11 +49,16 @@ const data = {
 try {
     await addDoc(collection(db, "request"), data);
     Swal.fire({
-      icon: 'success',
-      title: 'ส่งคำขอสำเร็จ',
-      text: 'บันทึกข้อมูลเรียบร้อยแล้ว 😊',
-      confirmButtonText: 'ตกลง'
+        icon: 'success',
+        title: 'ส่งคำขอสำเร็จ',
+        text: 'บันทึกข้อมูลเรียบร้อยแล้ว ',
+        confirmButtonText: 'ตกลง',
+        timer: 1500,
+        showConfirmButton: false
+    }).then(() => {
+    document.getElementById("form").reset();
     });
+
 } catch (e) {
     console.error("Error adding document: ", e);
     alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
