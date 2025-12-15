@@ -56,6 +56,7 @@ const data = {
 
 try {
     await addDoc(collection(db, "request"), data);
+    await sendLineMessage(data);
     Swal.fire({
         icon: 'success',
         title: 'ส่งคำขอสำเร็จ',
@@ -77,6 +78,20 @@ try {
         showConfirmButton: false
     });
 }
+}
+
+async function sendLineMessage(data) {
+  try {
+    await fetch("https://script.google.com/macros/s/AKfycbxwMOw2s5XzecMNJSWJcTQXuaDBjil-nFEXDBxU9jHAG8NiEY1nH9ZiNXemt54OBzQw/exec", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  } catch (err) {
+    console.error("ส่ง LINE ไม่สำเร็จ", err);
+  }
 }
 
 window.submitForm = function () {
