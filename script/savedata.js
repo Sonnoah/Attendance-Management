@@ -1,48 +1,46 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
-
-import { getFirestore, collection, addDoc 
+import {
+  getFirestore,
+  collection,
+  addDoc
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSyC1qq59U0moH20dOCpAITNFR9ttHLxTRFg",
-authDomain: "pt-test-b0dc9.firebaseapp.com",
-projectId: "pt-test-b0dc9",
-storageBucket: "pt-test-b0dc9.firebasestorage.app",
-messagingSenderId: "1938984234",
-appId: "1:1938984234:web:89078e2d16c3958cc6a253",
-measurementId: "G-F2KV6LY4XE"
+  apiKey: "AIzaSyC1qq59U0moH20dOCpAITNFR9ttHLxTRFg",
+  authDomain: "pt-test-b0dc9.firebaseapp.com",
+  projectId: "pt-test-b0dc9",
+  storageBucket: "pt-test-b0dc9.firebasestorage.app",
+  messagingSenderId: "1938984234",
+  appId: "1:1938984234:web:89078e2d16c3958cc6a253",
+  measurementId: "G-F2KV6LY4XE"
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const db = getFirestore(app);   
+getAnalytics(app);
+const db = getFirestore(app);
 
 async function main() {
-await liff.init({ liffId: "2008650824-wo3yRXa9" });
-if (liff.isLoggedIn()) {
-    getUserProfile();
-} else {
+  await liff.init({ liffId: "2008650824-wo3yRXa9" });
+  if (liff.isLoggedIn()) {
+    const profile = await liff.getProfile();
+    document.getElementById("userId").value = profile.userId;
+  } else {
     liff.login();
-}
+  }
 }
 main();
 
-async function getUserProfile() {
-const profile = await liff.getProfile();
-document.getElementById("userId").value = profile.userId;
-}
 
 async function saveToFirestore() {
-    
-const form = document.getElementById("Form");
+  const form = document.getElementById("Form");
 
   if (!form.checkValidity()) {
     form.reportValidity();
     return;
   }
-  
-const data = {
+
+  const data = {
     userId: document.getElementById("userId").value,
     name: document.getElementById("name").value,
     type: document.getElementById("type").value,
@@ -52,48 +50,30 @@ const data = {
     count_day: document.getElementById("count_day").value,
     note: document.getElementById("note").value,
     timestamp: new Date(),
-};
+  };
 
-try {
-    await addDoc(collection(db, "request"), data);
-    await sendLineMessage(data);
-    Swal.fire({
-        icon: 'success',
-        title: 'ส่งคำขอสำเร็จ',
-        text: 'บันทึกข้อมูลเรียบร้อยแล้ว ',
-        confirmButtonText: 'ตกลง',
-        timer: 1500,
-        showConfirmButton: false
-    });
-    form.reset();
-
-} catch (e) {
-    console.error("Error adding document: ", e);
-    Swal.fire({
-        icon: 'error',
-        title: 'ส่งคำขอไม่สำเร็จ',
-        text: 'เกิดข้อผิดพลาดในการบันทึกข้อมูล ',
-        confirmButtonText: 'ตกลง',
-        timer: 1500,
-        showConfirmButton: false
-    });
-}
-}
-
-async function sendLineMessage(data) {
   try {
-    await fetch("https://script.google.com/macros/s/AKfycbxwMOw2s5XzecMNJSWJcTQXuaDBjil-nFEXDBxU9jHAG8NiEY1nH9ZiNXemt54OBzQw/exec", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      }
+    await addDoc(collection(db, "request"), data);
+
+    Swal.fire({
+      icon: "success",
+      title: "ส่งคำขอสำเร็จ",
+      text: "ระบบบันทึกข้อมูลเรียบร้อยแล้ว",
+      timer: 1500,
+      showConfirmButton: false,
     });
-  } catch (err) {
-    console.error("ส่ง LINE ไม่สำเร็จ", err);
+
+    form.reset();
+  } catch (e) {
+    console.error(e);
+    Swal.fire({
+      icon: "error",
+      title: "ส่งคำขอไม่สำเร็จ",
+      text: "เกิดข้อผิดพลาดในการบันทึกข้อมูล",
+    });
   }
 }
 
 window.submitForm = function () {
-saveToFirestore();
+  saveToFirestore();
 };
